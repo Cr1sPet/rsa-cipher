@@ -2,7 +2,12 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.2)
+    ipaddr (1.2.5)
     json (2.6.3)
+    mrd_prime (0.1.0)
+      openssl (~> 2)
+    openssl (2.2.3)
+      ipaddr
     parallel (1.22.1)
     parser (3.2.1.0)
       ast (~> 2.4.1)
@@ -28,6 +33,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  mrd_prime
   rubocop
 
 BUNDLED WITH

@@ -22,8 +22,8 @@ def start(length, plain, is_prime)
 end
 
 length = 128
-# plain = 'dog.jpeg'
-plain = 'plain.txt'
-is_prime = false
+plain = 'dog.jpeg'
+# plain = 'plain.txt'
+is_prime = true
 
 start(length, plain, is_prime)

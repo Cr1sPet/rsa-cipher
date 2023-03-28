@@ -15,7 +15,7 @@ class RSAKeyGenerator
     @e = 65537
     prime_generator = PrimeNumberGenerator.new(length: length)
     @p = prime_generator.generate_new_prime
-    @p = @p + 1 unless is_prime
+    is_prime ? prime_generator.generate_new_prime : prime_generator.generate_new_prime + 1
     @q = prime_generator.generate_new_prime
   end
 

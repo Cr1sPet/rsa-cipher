@@ -8,10 +8,10 @@ class RSAKeyGenerator
 
   def self.call(...) = new(...).call
 
-  attr_accessor :p, :q, :n, :phi, :e, :d, :l
+  attr_accessor :p, :q, :n, :phi, :e, :d, :length
 
-  def initialize(length:)
-    @length = length
+  def initialize(len:)
+    @length = len / 2
     @e = 65537
     prime_generator = PrimeNumberGenerator.new(length: length)
     @p = prime_generator.generate_new_prime
@@ -25,7 +25,7 @@ class RSAKeyGenerator
     puts 'save public_key to public_key.json'
     puts 'save private_key to private_key.json'
     File.write('public_key.json', { e: @e, n: @n }.to_json)
-    File.write('private_key.json', { e: @e, d: @d }.to_json)
+    File.write('private_key.json', { d: @d, n: @n }.to_json)
   end
 
   def calculate_n

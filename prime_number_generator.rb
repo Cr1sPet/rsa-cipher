@@ -8,7 +8,7 @@ class PrimeNumberGenerator
   end
 
   def generate_new_prime
-    random_number = rand(2**length)
+    random_number = rand(2**(length - 1)...2**length)
     loop do
       return random_number if Prime.prime?(random_number, Prime::MillerRabin.new)
 

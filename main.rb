@@ -11,8 +11,8 @@ require_relative 'rsa_key_generator'
 
 Prime::MillerRabin.speed_intercept
 
-def start(length, plain)
-  RSAKeyGenerator.call(len: length)
+def start(length, plain, is_prime)
+  RSAKeyGenerator.call(len: length, is_prime: is_prime)
 
   encrypted = "encrypted-#{plain}"
   decrypted = "decrypted-#{plain}"
@@ -22,6 +22,8 @@ def start(length, plain)
 end
 
 length = 128
-plain = 'dog.jpeg'
+# plain = 'dog.jpeg'
+plain = 'plain.txt'
+is_prime = false
 
-start(length, plain)
+start(length, plain, is_prime)

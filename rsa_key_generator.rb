@@ -10,11 +10,12 @@ class RSAKeyGenerator
 
   attr_accessor :p, :q, :n, :phi, :e, :d, :length
 
-  def initialize(len:)
+  def initialize(len:, is_prime:)
     @length = len / 2
     @e = 65537
     prime_generator = PrimeNumberGenerator.new(length: length)
     @p = prime_generator.generate_new_prime
+    @p = @p + 1 unless is_prime
     @q = prime_generator.generate_new_prime
   end
 

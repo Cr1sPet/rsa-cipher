@@ -22,22 +22,25 @@ end
 
 ATTACK_TIME_BORDER = 60_000
 
-def generate_keys
-  keys = {}
-  (70..200).step(5) do |l|
-    keys[l] = RSAKeyGenerator.call(len: l, is_prime: true)
-  end
-  File.write('keys_by_l.json', JSON.pretty_generate(keys))
-end
-
 def attack
-  keys_by_l = JSON.parse(File.read('keys_by_l.json'))
   polard_stats = []
-  keys_by_l.each do |l, n|
+  border = 200
+  flag = true
+  (20..border).step(5) do |l|
+    n = RSAKeyGenerator.call(len: l, is_prime: true)
     polard_stats << PolardAttacker.call(n: n)
     polard_stats.last.merge!({ l: l })
     puts({ time: polard_stats.last[:process_time], len: l })
-    break if polard_stats.last[:process_time] >= ATTACK_TIME_BORDER
+    if polard_stats.last[:process_time] >= ATTACK_TIME_BORDER
+      @len = l + 1
+      break
+    end
+  end
+  (@len..@len + 4).step(1) do |l|
+    n = RSAKeyGenerator.call(len: l, is_prime: true)
+    polard_stats << PolardAttacker.call(n: n)
+    polard_stats.last.merge!({ l: l })
+    puts({ time: polard_stats.last[:process_time], len: l })
   end
   lengthes = polard_stats.map { |el| el[:l].to_s }
   data = polard_stats.map { |el| el[:process_time] }
@@ -75,7 +78,7 @@ def start(length, plain, is_prime)
 end
 
 length = 70
-plain = 'plain.txt'
+plain = 'dog.jpeg'
 is_prime = true
 
 case ARGV[0]

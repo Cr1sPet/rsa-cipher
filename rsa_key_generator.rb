@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require 'json'
-require 'rubocop'
+
 require_relative 'prime_number_generator'
 
 class RSAKeyGenerator
@@ -60,15 +59,13 @@ def mod_inverse(a, m)
   end
 
   def gcd_extended(a, b)
-      # Base Case
+
       if a == 0
           return b, 0, 1
       end
 
-      # To store results of recursive call
       gcd, x1, y1 = gcd_extended(b % a, a)
 
-      # Update x and y using results of recursive call
       x = y1 - (b / a) * x1
       y = x1
 

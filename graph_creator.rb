@@ -6,7 +6,6 @@ class GraphCreator
     @label_data = label_data
     @data = data
     @g = Gruff::Line.new
-    g.title = 'Wow!  Look at this!'
     @output = output
   end
 
